@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Visualization - Athul Velagapudi</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 300px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            gap: 10px;
+        }
+        
+        .bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            gap: 5px;
+        }
+        
+        .bar-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 250px;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .bar {
+            width: 25px;
+            background: linear-gradient(180deg, rgba(102, 126, 234, 0.8) 0%, rgba(102, 126, 234, 1) 100%);
+            border-radius: 4px 4px 0 0;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .bar:hover {
+            transform: translateY(-5px);
+        }
+        
+        .bar.precision {
+            background: linear-gradient(180deg, rgba(118, 75, 162, 0.8) 0%, rgba(118, 75, 162, 1) 100%);
+        }
+        
+        .bar.recall {
+            background: linear-gradient(180deg, rgba(240, 147, 251, 0.8) 0%, rgba(240, 147, 251, 1) 100%);
+        }
+        
+        .bar-label {
+            font-size: 0.75rem;
+            text-align: center;
+            margin-top: 5px;
+            color: #666;
+            max-width: 80px;
+            word-wrap: break-word;
+        }
+        
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        .pie-chart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .pie-svg {
+            transform: rotate(-90deg);
+        }
+        
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .tech-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .tech-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tech-label {
+            min-width: 120px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .tech-bar-bg {
+            flex: 1;
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-bar-fill {
+            height: 100%;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: width 1s ease;
+        }
+        
+        .timeline-chart {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .timeline-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 250px;
+            border-left: 2px solid #ddd;
+            border-bottom: 2px solid #ddd;
+            padding: 10px;
+            position: relative;
+        }
+        
+        .timeline-point {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+        
+        .point-marker {
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            margin-bottom: 5px;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+        
+        .point-label {
+            font-size: 0.75rem;
+            color: #666;
+            transform: rotate(-45deg);
+            white-space: nowrap;
+            margin-top: 20px;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 30px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">Athul Velagapudi</h1>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="visualization.html" class="active">Visualization</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Data Science Visualizations</h1>
+            <p class="subtitle">Interactive data visualizations and insights</p>
+        </section>
+
+        <section class="viz-section">
+            <h2>Machine Learning Model Performance</h2>
+            <p>Comparison of different machine learning algorithms on classification tasks</p>
+            <div class="bar-chart">
+                <div class="bar-group">
+                    <div class="bar-container">
+                        <div class="bar" style="height: 92%" title="Accuracy: 0.92"></div>
+                        <div class="bar precision" style="height: 90%" title="Precision: 0.90"></div>
+                        <div class="bar recall" style="height: 91%" title="Recall: 0.91"></div>
+                    </div>
+                    <div class="bar-label">Random Forest</div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar-container">
+                        <div class="bar" style="height: 88%" title="Accuracy: 0.88"></div>
+                        <div class="bar precision" style="height: 87%" title="Precision: 0.87"></div>
+                        <div class="bar recall" style="height: 86%" title="Recall: 0.86"></div>
+                    </div>
+                    <div class="bar-label">SVM</div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar-container">
+                        <div class="bar" style="height: 85%" title="Accuracy: 0.85"></div>
+                        <div class="bar precision" style="height: 84%" title="Precision: 0.84"></div>
+                        <div class="bar recall" style="height: 83%" title="Recall: 0.83"></div>
+                    </div>
+                    <div class="bar-label">Logistic Regression</div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar-container">
+                        <div class="bar" style="height: 94%" title="Accuracy: 0.94"></div>
+                        <div class="bar precision" style="height: 92%" title="Precision: 0.92"></div>
+                        <div class="bar recall" style="height: 93%" title="Recall: 0.93"></div>
+                    </div>
+                    <div class="bar-label">Neural Network</div>
+                </div>
+                <div class="bar-group">
+                    <div class="bar-container">
+                        <div class="bar" style="height: 93%" title="Accuracy: 0.93"></div>
+                        <div class="bar precision" style="height: 91%" title="Precision: 0.91"></div>
+                        <div class="bar recall" style="height: 92%" title="Recall: 0.92"></div>
+                    </div>
+                    <div class="bar-label">XGBoost</div>
+                </div>
+            </div>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(180deg, rgba(102, 126, 234, 0.8) 0%, rgba(102, 126, 234, 1) 100%);"></div>
+                    <span>Accuracy</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(180deg, rgba(118, 75, 162, 0.8) 0%, rgba(118, 75, 162, 1) 100%);"></div>
+                    <span>Precision</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(180deg, rgba(240, 147, 251, 0.8) 0%, rgba(240, 147, 251, 1) 100%);"></div>
+                    <span>Recall</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="viz-section">
+            <h2>Project Categories Distribution</h2>
+            <p>Distribution of projects across different categories</p>
+            <div class="pie-chart">
+                <svg class="pie-svg" width="280" height="280" viewBox="0 0 280 280">
+                    <circle cx="140" cy="140" r="120" fill="none" stroke="#667eea" stroke-width="80" 
+                            stroke-dasharray="126 628" stroke-dashoffset="0" />
+                    <circle cx="140" cy="140" r="120" fill="none" stroke="#764ba2" stroke-width="80" 
+                            stroke-dasharray="42 628" stroke-dashoffset="-126" />
+                    <circle cx="140" cy="140" r="120" fill="none" stroke="#f093fb" stroke-width="80" 
+                            stroke-dasharray="63 628" stroke-dashoffset="-168" />
+                    <circle cx="140" cy="140" r="120" fill="none" stroke="#4facfe" stroke-width="80" 
+                            stroke-dasharray="42 628" stroke-dashoffset="-231" />
+                    <circle cx="140" cy="140" r="120" fill="none" stroke="#00f2fe" stroke-width="80" 
+                            stroke-dasharray="63 628" stroke-dashoffset="-273" />
+                    <circle cx="140" cy="140" r="120" fill="none" stroke="#43e97b" stroke-width="80" 
+                            stroke-dasharray="42 628" stroke-dashoffset="-336" />
+                </svg>
+                <div class="pie-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #667eea;"></div>
+                        <span>Machine Learning (33%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #764ba2;"></div>
+                        <span>Deep Learning (11%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f093fb;"></div>
+                        <span>Web Development (17%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4facfe;"></div>
+                        <span>Data Analysis (11%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #00f2fe;"></div>
+                        <span>Optimization (17%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #43e97b;"></div>
+                        <span>DevOps (11%)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="viz-section">
+            <h2>Technology Stack Usage</h2>
+            <p>Technologies and frameworks used across all projects</p>
+            <div class="tech-bars">
+                <div class="tech-bar-item">
+                    <div class="tech-label">Python</div>
+                    <div class="tech-bar-bg">
+                        <div class="tech-bar-fill" style="width: 90%; background: #667eea;">18</div>
+                    </div>
+                </div>
+                <div class="tech-bar-item">
+                    <div class="tech-label">Jupyter</div>
+                    <div class="tech-bar-bg">
+                        <div class="tech-bar-fill" style="width: 75%; background: #764ba2;">15</div>
+                    </div>
+                </div>
+                <div class="tech-bar-item">
+                    <div class="tech-label">ML Libraries</div>
+                    <div class="tech-bar-bg">
+                        <div class="tech-bar-fill" style="width: 60%; background: #f093fb;">12</div>
+                    </div>
+                </div>
+                <div class="tech-bar-item">
+                    <div class="tech-label">CV/NLP</div>
+                    <div class="tech-bar-bg">
+                        <div class="tech-bar-fill" style="width: 15%; background: #4facfe;">3</div>
+                    </div>
+                </div>
+                <div class="tech-bar-item">
+                    <div class="tech-label">Flask</div>
+                    <div class="tech-bar-bg">
+                        <div class="tech-bar-fill" style="width: 10%; background: #00f2fe;">2</div>
+                    </div>
+                </div>
+                <div class="tech-bar-item">
+                    <div class="tech-label">JavaScript</div>
+                    <div class="tech-bar-bg">
+                        <div class="tech-bar-fill" style="width: 10%; background: #43e97b;">2</div>
+                    </div>
+                </div>
+                <div class="tech-bar-item">
+                    <div class="tech-label">HTML/CSS</div>
+                    <div class="tech-bar-bg">
+                        <div class="tech-bar-fill" style="width: 10%; background: #ff9f40;">2</div>
+                    </div>
+                </div>
+                <div class="tech-bar-item">
+                    <div class="tech-label">Docker</div>
+                    <div class="tech-bar-bg">
+                        <div class="tech-bar-fill" style="width: 5%; background: #ff6384;">1</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="viz-section">
+            <h2>Project Timeline</h2>
+            <p>Projects created over time showing growth trajectory</p>
+            <div class="timeline-chart">
+                <div class="timeline-grid">
+                    <svg class="timeline-line" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="30,160 95,75 160,120 225,110 290,105 355,70 420,135 485,145" 
+                                  fill="none" stroke="#667eea" stroke-width="3" opacity="0.8"/>
+                    </svg>
+                    <div class="timeline-point">
+                        <div style="height: calc(160px)"></div>
+                        <div class="point-marker"></div>
+                        <div class="point-label">Jul '22</div>
+                    </div>
+                    <div class="timeline-point">
+                        <div style="height: calc(75px)"></div>
+                        <div class="point-marker"></div>
+                        <div class="point-label">Oct '22</div>
+                    </div>
+                    <div class="timeline-point">
+                        <div style="height: calc(120px)"></div>
+                        <div class="point-marker"></div>
+                        <div class="point-label">Nov '22</div>
+                    </div>
+                    <div class="timeline-point">
+                        <div style="height: calc(110px)"></div>
+                        <div class="point-marker"></div>
+                        <div class="point-label">Jun '23</div>
+                    </div>
+                    <div class="timeline-point">
+                        <div style="height: calc(105px)"></div>
+                        <div class="point-marker"></div>
+                        <div class="point-label">Jul '23</div>
+                    </div>
+                    <div class="timeline-point">
+                        <div style="height: calc(70px)"></div>
+                        <div class="point-marker"></div>
+                        <div class="point-label">Aug '23</div>
+                    </div>
+                    <div class="timeline-point">
+                        <div style="height: calc(135px)"></div>
+                        <div class="point-marker"></div>
+                        <div class="point-label">Jan '25</div>
+                    </div>
+                    <div class="timeline-point">
+                        <div style="height: calc(145px)"></div>
+                        <div class="point-marker"></div>
+                        <div class="point-label">Mar '25</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Athul Velagapudi. All rights reserved.</p>
+        <p>
+            <a href="https://github.com/AthulVelagapudi" target="_blank">GitHub</a>
+        </p>
+    </footer>
+</body>
+</html>
