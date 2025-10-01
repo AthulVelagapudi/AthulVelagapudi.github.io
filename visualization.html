@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Visualization - Athul Velagapudi</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-logo">Athul Velagapudi</h1>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="visualization.html" class="active">Visualization</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Data Science Visualizations</h1>
+            <p class="subtitle">Interactive data visualizations and insights</p>
+        </section>
+
+        <section class="viz-section">
+            <h2>Machine Learning Model Performance</h2>
+            <p>Comparison of different machine learning algorithms on classification tasks</p>
+            <div id="mlPerformanceChart" class="chart-container"></div>
+        </section>
+
+        <section class="viz-section">
+            <h2>Project Categories Distribution</h2>
+            <p>Distribution of projects across different categories</p>
+            <div id="projectCategoriesChart" class="chart-container"></div>
+        </section>
+
+        <section class="viz-section">
+            <h2>Technology Stack Usage</h2>
+            <p>Technologies and frameworks used across all projects</p>
+            <div id="techStackChart" class="chart-container"></div>
+        </section>
+
+        <section class="viz-section">
+            <h2>Project Timeline</h2>
+            <p>Projects created over time</p>
+            <div id="projectTimelineChart" class="chart-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Athul Velagapudi. All rights reserved.</p>
+        <p>
+            <a href="https://github.com/AthulVelagapudi" target="_blank">GitHub</a>
+        </p>
+    </footer>
+
+    <script>
+        // ML Model Performance Comparison
+        const mlModels = ['Random Forest', 'SVM', 'Logistic Regression', 'Neural Network', 'XGBoost'];
+        const accuracy = [0.92, 0.88, 0.85, 0.94, 0.93];
+        const precision = [0.90, 0.87, 0.84, 0.92, 0.91];
+        const recall = [0.91, 0.86, 0.83, 0.93, 0.92];
+        
+        const performanceTrace1 = {
+            x: mlModels,
+            y: accuracy,
+            name: 'Accuracy',
+            type: 'bar',
+            marker: { color: '#667eea' }
+        };
+        
+        const performanceTrace2 = {
+            x: mlModels,
+            y: precision,
+            name: 'Precision',
+            type: 'bar',
+            marker: { color: '#764ba2' }
+        };
+        
+        const performanceTrace3 = {
+            x: mlModels,
+            y: recall,
+            name: 'Recall',
+            type: 'bar',
+            marker: { color: '#f093fb' }
+        };
+        
+        const performanceLayout = {
+            title: 'ML Model Performance Metrics',
+            barmode: 'group',
+            xaxis: { title: 'Models' },
+            yaxis: { title: 'Score', range: [0, 1] },
+            plot_bgcolor: '#f8f9fa',
+            paper_bgcolor: '#f8f9fa'
+        };
+        
+        Plotly.newPlot('mlPerformanceChart', [performanceTrace1, performanceTrace2, performanceTrace3], performanceLayout, {responsive: true});
+
+        // Project Categories Distribution
+        const categories = ['Machine Learning', 'Deep Learning', 'Web Development', 'Data Analysis', 'Optimization', 'DevOps'];
+        const projectCounts = [6, 2, 3, 2, 3, 2];
+        
+        const categoriesTrace = {
+            labels: categories,
+            values: projectCounts,
+            type: 'pie',
+            marker: {
+                colors: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b']
+            },
+            textinfo: 'label+percent',
+            hoverinfo: 'label+value+percent'
+        };
+        
+        const categoriesLayout = {
+            title: 'Project Distribution by Category',
+            plot_bgcolor: '#f8f9fa',
+            paper_bgcolor: '#f8f9fa'
+        };
+        
+        Plotly.newPlot('projectCategoriesChart', [categoriesTrace], categoriesLayout, {responsive: true});
+
+        // Technology Stack Usage
+        const technologies = ['Python', 'Jupyter', 'Flask', 'JavaScript', 'Docker', 'HTML/CSS', 'ML Libraries', 'CV/NLP'];
+        const usageCounts = [18, 15, 2, 2, 1, 2, 12, 3];
+        
+        const techTrace = {
+            x: technologies,
+            y: usageCounts,
+            type: 'bar',
+            marker: {
+                color: usageCounts,
+                colorscale: 'Viridis'
+            }
+        };
+        
+        const techLayout = {
+            title: 'Technology Stack Frequency',
+            xaxis: { title: 'Technology', tickangle: -45 },
+            yaxis: { title: 'Number of Projects' },
+            plot_bgcolor: '#f8f9fa',
+            paper_bgcolor: '#f8f9fa'
+        };
+        
+        Plotly.newPlot('techStackChart', [techTrace], techLayout, {responsive: true});
+
+        // Project Timeline
+        const months = ['Jul 2022', 'Oct 2022', 'Nov 2022', 'Jun 2023', 'Jul 2023', 'Aug 2023', 'Jan 2025', 'Mar 2025'];
+        const projectsPerMonth = [4, 5, 2, 2, 2, 3, 1, 1];
+        const cumulativeProjects = [4, 9, 11, 13, 15, 18, 19, 20];
+        
+        const timelineTrace1 = {
+            x: months,
+            y: projectsPerMonth,
+            name: 'Projects Created',
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: { color: '#667eea', size: 10 },
+            line: { width: 3 }
+        };
+        
+        const timelineTrace2 = {
+            x: months,
+            y: cumulativeProjects,
+            name: 'Cumulative Projects',
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: { color: '#f093fb', size: 10 },
+            line: { width: 3, dash: 'dash' },
+            yaxis: 'y2'
+        };
+        
+        const timelineLayout = {
+            title: 'Project Development Timeline',
+            xaxis: { title: 'Month' },
+            yaxis: { title: 'New Projects' },
+            yaxis2: {
+                title: 'Total Projects',
+                overlaying: 'y',
+                side: 'right'
+            },
+            plot_bgcolor: '#f8f9fa',
+            paper_bgcolor: '#f8f9fa'
+        };
+        
+        Plotly.newPlot('projectTimelineChart', [timelineTrace1, timelineTrace2], timelineLayout, {responsive: true});
+    </script>
+</body>
+</html>
