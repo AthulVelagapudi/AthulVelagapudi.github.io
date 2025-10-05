@@ -117,12 +117,28 @@ body {
 .institution {
     color: #666;
     font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.duration {
+    color: #764ba2;
+    font-weight: 600;
     margin-bottom: 1rem;
 }
 
 .education-item ul {
     list-style-position: inside;
     color: #555;
+}
+
+.status {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
 }
 
 /* Course Grid */
@@ -152,6 +168,40 @@ body {
 .course-item p {
     color: #555;
     font-size: 0.9rem;
+}
+
+.course-preview {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.course-details ul {
+    list-style-position: inside;
+    margin: 0.5rem 0;
+    color: #555;
+}
+
+.view-more-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.view-more-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+}
+
+.view-more-btn.expanded {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
 /* Project Preview */
